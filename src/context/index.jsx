@@ -1,28 +1,27 @@
 import React, { useState } from "react";
-import { initialState } from "../data";
+import { SHOPPING_LIST } from "../data";
+import { getID } from "../utils";
 
 export const GlobalContext = React.createContext({});
 
-export const GlobalContextProvider = props => {
-  const [shoppingList, setShoppingList] = useState(initialState.shoppingList);
-  const addItem = item => {
+export const GlobalContextProvider = ({ children }) => {
+  const [shoppingList, setShoppingList] = useState(SHOPPING_LIST);
+  const addItem = name => {
     const newItem = {
-      id: shoppingList.length,
-      item,
+      id: getID(),
+      name,
       inCart: false
     };
     const newShoppingList = [...shoppingList, newItem];
     setShoppingList(newShoppingList);
   };
   const updateShoppingList = id => {
-    const updatedShoppingList = shoppingList.map(item =>
-      item.id === id ? { ...item, inCart: !item.inCart } : item
-    );
+    const updatedShoppingList = shoppingList.map(item => (item.id === id ? { ...item, inCart: !item.inCart } : item));
     setShoppingList(updatedShoppingList);
   };
   const needToBuy = shoppingList.filter(item => !item.inCart);
   const inCart = shoppingList.filter(item => item.inCart);
-  const itemValidation = shoppingList.map(e => e.item.toLowerCase());
+  const itemValidation = shoppingList.map(item => item.name.toLowerCase());
   return (
     <GlobalContext.Provider
       value={{
@@ -33,7 +32,7 @@ export const GlobalContextProvider = props => {
         itemValidation
       }}
     >
-      {props.children}
+      {children}
     </GlobalContext.Provider>
   );
 };

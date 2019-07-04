@@ -1,24 +1,13 @@
 import React, { useContext } from "react";
 import { GlobalContext } from "../context";
-import ItemHeader from "./ItemHeader";
-import Item from "./Item";
+import { Items } from ".";
 
 const ShoppingList = _ => {
   const { needToBuy, inCart } = useContext(GlobalContext);
   return (
     <div className="shopping-list">
-      <div className="to-buy">
-        <ItemHeader title="Need To Buy" />
-        {needToBuy.map(item => (
-          <Item symbol="+" status="add" item={item} key={item.id} />
-        ))}
-      </div>
-      <div className="cart">
-        <ItemHeader title="In Cart" />
-        {inCart.map(item => (
-          <Item symbol="-" status="remove" item={item} key={item.id} />
-        ))}
-      </div>
+      <Items classes="to-buy" title="Need To Buy" symbol="+" status="add" items={needToBuy} />
+      <Items classes="cart" title="In Cart" symbol="-" status="remove" items={inCart} />
     </div>
   );
 };

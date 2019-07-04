@@ -1,8 +1,9 @@
 import React from "react";
+import classNames from "classnames";
 
-const Header = _ => (
-  <header className="head">
-    <h1>Shopping List</h1>
+const Header = ({ title, classes }) => (
+  <header className={classNames("head", classes)}>
+    <h1>{title}</h1>
   </header>
 );
 

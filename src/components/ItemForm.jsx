@@ -4,26 +4,24 @@ import { GlobalContext } from "../context";
 
 const ItemForm = _ => {
   const { addItem, itemValidation } = useContext(GlobalContext);
-  const [value, setValue] = useState(String());
+  const [name, setName] = useState(String());
   const handleSubmit = e => {
     e.preventDefault();
-    addItem(value);
-    setValue(String());
+    addItem(name);
+    setName(String());
   };
-  const isDuplicate = itemValidation.includes(value.toLowerCase());
+  const isDuplicate = itemValidation.includes(name.toLowerCase());
   return (
     <form className="form" onSubmit={handleSubmit}>
       <input
         type="text"
-        value={value}
+        value={name}
         placeholder="Add an item to your shopping list"
-        onChange={e => setValue(e.target.value)}
+        onChange={e => setName(e.target.value)}
       />
       <input
         disabled={isDuplicate}
-        className={classNames({
-          disabled: isDuplicate
-        })}
+        className={classNames({ disabled: isDuplicate })}
         value={isDuplicate ? "Item already on the List!" : "Add Item"}
         type="submit"
       />

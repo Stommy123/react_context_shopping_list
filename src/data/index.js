@@ -1,19 +1,19 @@
-export const initialState = {
-  shoppingList: [
-    {
-      id: 0,
-      item: "Milk",
-      inCart: false
-    },
-    {
-      id: 1,
-      item: "Egg",
-      inCart: false
-    },
-    {
-      id: 2,
-      item: "Dog Food",
-      inCart: true
-    }
-  ]
-};
+import { getID } from "../utils";
+
+export const SHOPPING_LIST = [
+  {
+    id: getID(),
+    name: "Milk",
+    inCart: false
+  },
+  {
+    id: getID(),
+    name: "Egg",
+    inCart: false
+  },
+  {
+    id: getID(),
+    name: "Dog Food",
+    inCart: true
+  }
+];
